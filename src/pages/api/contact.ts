@@ -9,7 +9,6 @@ export const POST: APIRoute = async ({ request }) => {
   try {
     const { name, email, message } = await request.json();
 
-    // Validate required fields
     if (!name || !email || !message) {
       return new Response(
         JSON.stringify({ error: 'All fields are required.' }),
@@ -17,7 +16,6 @@ export const POST: APIRoute = async ({ request }) => {
       );
     }
 
-    // Basic email validation
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
       return new Response(
         JSON.stringify({ error: 'Invalid email address.' }),
@@ -47,7 +45,7 @@ export const POST: APIRoute = async ({ request }) => {
     if (sendError) {
       console.error('Resend error:', JSON.stringify(sendError));
       return new Response(
-        JSON.stringify({ error: sendError.message || 'Failed to send email.' }),
+        JSON.stringify({ error: 'Failed to send message. Please try again.' }),
         { status: 500, headers: { 'Content-Type': 'application/json' } }
       );
     }

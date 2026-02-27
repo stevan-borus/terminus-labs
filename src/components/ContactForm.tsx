@@ -1,4 +1,5 @@
 import { useState, type FormEvent } from 'react';
+import { Check, Send, Loader2, AlertCircle } from 'lucide-react';
 
 export default function ContactForm() {
   const [status, setStatus] = useState<'idle' | 'sending' | 'success' | 'error'>('idle');
@@ -42,9 +43,7 @@ export default function ContactForm() {
     return (
       <div className="flex flex-col items-center justify-center py-12 text-center">
         <div className="w-16 h-16 rounded-full bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center mb-6">
-          <svg className="w-8 h-8 text-emerald-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-            <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
-          </svg>
+          <Check className="w-8 h-8 text-emerald-400" />
         </div>
         <h3 className="text-xl font-semibold text-[var(--color-text-primary)] mb-2">Message sent!</h3>
         <p className="text-[var(--color-text-secondary)] mb-6">We'll get back to you within 24 hours.</p>
@@ -103,33 +102,30 @@ export default function ContactForm() {
         />
       </div>
 
-      <div className="flex items-center gap-4">
-        <button
-          type="submit"
-          disabled={status === 'sending'}
-          className="btn-magnetic inline-flex items-center gap-3 px-8 py-4 rounded-full text-base font-medium bg-gradient-to-r from-[var(--color-accent-cyan)] to-[var(--color-accent-violet)] text-white shadow-lg shadow-[color-mix(in_srgb,var(--color-accent-violet)_20%,transparent)] hover:shadow-[color-mix(in_srgb,var(--color-accent-violet)_40%,transparent)] transition-shadow duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
-        >
-          {status === 'sending' ? (
-            <>
-              Sending...
-              <svg className="w-4 h-4 animate-spin" viewBox="0 0 24 24" fill="none">
-                <circle cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="3" strokeDasharray="31.4 31.4" strokeLinecap="round" />
-              </svg>
-            </>
-          ) : (
-            <>
-              Send Message
-              <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                <path strokeLinecap="round" strokeLinejoin="round" d="M6 12L3.269 3.126A59.768 59.768 0 0121.485 12 59.77 59.77 0 013.27 20.876L5.999 12zm0 0h7.5" />
-              </svg>
-            </>
-          )}
-        </button>
+      {status === 'error' && (
+        <div className="flex items-center gap-3 px-4 py-3 rounded-xl bg-red-500/5 border border-red-500/20 text-sm text-red-400">
+          <AlertCircle className="w-4 h-4 shrink-0" />
+          {errorMsg}
+        </div>
+      )}
 
-        {status === 'error' && (
-          <span className="text-sm text-red-400">{errorMsg}</span>
+      <button
+        type="submit"
+        disabled={status === 'sending'}
+        className="btn-magnetic inline-flex items-center gap-3 px-8 py-4 rounded-full text-base font-medium bg-gradient-to-r from-[var(--color-accent-cyan)] to-[var(--color-accent-violet)] text-white shadow-lg shadow-[color-mix(in_srgb,var(--color-accent-violet)_20%,transparent)] hover:shadow-[color-mix(in_srgb,var(--color-accent-violet)_40%,transparent)] transition-shadow duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
+      >
+        {status === 'sending' ? (
+          <>
+            Sending...
+            <Loader2 className="w-4 h-4 animate-spin" />
+          </>
+        ) : (
+          <>
+            Send Message
+            <Send className="w-4 h-4" />
+          </>
         )}
-      </div>
+      </button>
     </form>
   );
 }
