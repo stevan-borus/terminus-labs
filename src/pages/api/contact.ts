@@ -36,13 +36,23 @@ export const POST: APIRoute = async ({ request }) => {
 
     const resend = new Resend(apiKey);
 
-    await resend.emails.send({
+    const { data, error: sendError } = await resend.emails.send({
       from: 'Terminus Labs <onboarding@resend.dev>',
       to: 'contact@terminuslabs.cc',
       replyTo: email,
       subject: `New inquiry from ${name}`,
       react: createElement(ContactEmail, { name, email, message }),
     });
+
+    if (sendError) {
+      console.error('Resend error:', JSON.stringify(sendError));
+      return new Response(
+        JSON.stringify({ error: sendError.message || 'Failed to send email.' }),
+        { status: 500, headers: { 'Content-Type': 'application/json' } }
+      );
+    }
+
+    console.log('Email sent successfully:', JSON.stringify(data));
 
     return new Response(
       JSON.stringify({ success: true }),
