@@ -36,7 +36,7 @@ export const POST: APIRoute = async ({ request }) => {
 
     await resend.emails.send({
       from: 'Terminus Labs <onboarding@resend.dev>',
-      to: 'contact@terminuslabs.com',
+      to: 'contact@terminuslabs.cc',
       replyTo: email,
       subject: `New inquiry from ${name}`,
       text: `Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`,
