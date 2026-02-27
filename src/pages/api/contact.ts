@@ -1,5 +1,7 @@
 import type { APIRoute } from 'astro';
 import { Resend } from 'resend';
+import { createElement } from 'react';
+import ContactEmail from '../../emails/ContactEmail';
 
 export const prerender = false;
 
@@ -39,7 +41,7 @@ export const POST: APIRoute = async ({ request }) => {
       to: 'contact@terminuslabs.cc',
       replyTo: email,
       subject: `New inquiry from ${name}`,
-      text: `Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`,
+      react: createElement(ContactEmail, { name, email, message }),
     });
 
     return new Response(
