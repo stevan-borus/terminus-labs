@@ -1,0 +1,65 @@
+---
+const year = new Date().getFullYear();
+---
+
+<footer class="relative border-t border-border-subtle/50">
+  <div class="mx-auto max-w-[1200px] px-6 py-16">
+    <div class="grid sm:grid-cols-2 md:grid-cols-4 gap-10 md:gap-8 mb-12">
+      <!-- Brand -->
+      <div class="sm:col-span-2 md:col-span-1">
+        <span class="font-[family-name:var(--font-display)] text-xl text-text-primary block mb-3">
+          Terminus Labs
+        </span>
+        <p class="text-sm text-text-muted leading-relaxed">
+          Custom software development<br />and technical consulting.
+        </p>
+      </div>
+
+      <!-- Navigation -->
+      <div>
+        <h4 class="text-xs font-mono text-text-muted tracking-widest uppercase mb-4">Navigate</h4>
+        <ul class="space-y-2">
+          <li><a href="/#about" class="text-sm text-text-secondary hover:text-text-primary transition-colors">About</a></li>
+          <li><a href="/#services" class="text-sm text-text-secondary hover:text-text-primary transition-colors">Services</a></li>
+          <li><a href="/#contact" class="text-sm text-text-secondary hover:text-text-primary transition-colors">Contact</a></li>
+        </ul>
+      </div>
+
+      <!-- Legal -->
+      <div>
+        <h4 class="text-xs font-mono text-text-muted tracking-widest uppercase mb-4">Legal</h4>
+        <ul class="space-y-2">
+          <li><a href="/privacy-policy" class="text-sm text-text-secondary hover:text-text-primary transition-colors">Privacy Policy</a></li>
+          <li><a href="/terms" class="text-sm text-text-secondary hover:text-text-primary transition-colors">Terms & Conditions</a></li>
+        </ul>
+      </div>
+
+      <!-- Contact info -->
+      <div>
+        <h4 class="text-xs font-mono text-text-muted tracking-widest uppercase mb-4">Contact</h4>
+        <ul class="space-y-2">
+          <li>
+            <a href="mailto:contact@terminuslabs.com" class="text-sm text-text-secondary hover:text-accent-cyan transition-colors font-mono">
+              contact@terminuslabs.com
+            </a>
+          </li>
+          <li class="text-sm text-text-muted leading-relaxed">
+            30 N Gould St, Ste R<br />
+            Sheridan, WY 82801, USA
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Bottom bar -->
+    <div class="section-divider mb-8"></div>
+    <div class="flex flex-col sm:flex-row justify-between items-center gap-4">
+      <p class="text-xs text-text-muted">
+        &copy; {year} Terminus Labs LLC &mdash; All Rights Reserved
+      </p>
+      <p class="text-xs text-text-muted">
+        Terminus Labs LLC &bull; 30 N Gould St, Ste R, Sheridan, WY 82801
+      </p>
+    </div>
+  </div>
+</footer>

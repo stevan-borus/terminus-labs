@@ -1,0 +1,111 @@
+---
+const currentPath = Astro.url.pathname;
+const isHome = currentPath === '/';
+---
+
+<nav
+  data-nav
+  class="fixed top-0 left-0 right-0 z-50 transition-all duration-500"
+>
+  <div class="mx-auto max-w-[1200px] px-6 py-5 flex items-center justify-between">
+    <a href="/" class="flex items-center gap-2 group">
+      <span class="font-[family-name:var(--font-display)] text-2xl text-text-primary tracking-tight">
+        Terminus Labs
+      </span>
+    </a>
+
+    <div class="hidden md:flex items-center gap-8">
+      {isHome ? (
+        <>
+          <a href="#about" class="text-sm text-text-secondary hover:text-text-primary transition-colors duration-300">About</a>
+          <a href="#services" class="text-sm text-text-secondary hover:text-text-primary transition-colors duration-300">Services</a>
+          <a href="#contact" class="text-sm text-text-secondary hover:text-text-primary transition-colors duration-300">Contact</a>
+        </>
+      ) : (
+        <>
+          <a href="/#about" class="text-sm text-text-secondary hover:text-text-primary transition-colors duration-300">About</a>
+          <a href="/#services" class="text-sm text-text-secondary hover:text-text-primary transition-colors duration-300">Services</a>
+          <a href="/#contact" class="text-sm text-text-secondary hover:text-text-primary transition-colors duration-300">Contact</a>
+        </>
+      )}
+    </div>
+
+    <!-- Mobile menu button -->
+    <button
+      data-mobile-toggle
+      class="md:hidden flex flex-col gap-1.5 p-2 -mr-2"
+      aria-label="Toggle menu"
+    >
+      <span class="w-5 h-px bg-text-secondary transition-all duration-300 origin-center" data-line-1></span>
+      <span class="w-5 h-px bg-text-secondary transition-all duration-300" data-line-2></span>
+      <span class="w-5 h-px bg-text-secondary transition-all duration-300 origin-center" data-line-3></span>
+    </button>
+  </div>
+
+  <!-- Mobile menu -->
+  <div data-mobile-menu class="md:hidden overflow-hidden max-h-0 transition-all duration-500 ease-in-out">
+    <div class="px-6 pb-6 flex flex-col gap-4 border-t border-border-subtle/50 pt-4">
+      {isHome ? (
+        <>
+          <a href="#about" class="text-text-secondary hover:text-text-primary transition-colors" data-mobile-link>About</a>
+          <a href="#services" class="text-text-secondary hover:text-text-primary transition-colors" data-mobile-link>Services</a>
+          <a href="#contact" class="text-text-secondary hover:text-text-primary transition-colors" data-mobile-link>Contact</a>
+        </>
+      ) : (
+        <>
+          <a href="/#about" class="text-text-secondary hover:text-text-primary transition-colors" data-mobile-link>About</a>
+          <a href="/#services" class="text-text-secondary hover:text-text-primary transition-colors" data-mobile-link>Services</a>
+          <a href="/#contact" class="text-text-secondary hover:text-text-primary transition-colors" data-mobile-link>Contact</a>
+        </>
+      )}
+    </div>
+  </div>
+</nav>
+
+<style>
+  nav {
+    background: transparent;
+  }
+
+  nav.nav-scrolled {
+    background: color-mix(in srgb, var(--color-surface) 80%, transparent);
+    backdrop-filter: blur(16px) saturate(180%);
+    -webkit-backdrop-filter: blur(16px) saturate(180%);
+    border-bottom: 1px solid color-mix(in srgb, var(--color-border-subtle) 50%, transparent);
+  }
+
+  /* Mobile menu open state handled via JS */
+  [data-mobile-toggle].open [data-line-1] {
+    transform: rotate(45deg) translateY(4px);
+  }
+  [data-mobile-toggle].open [data-line-2] {
+    opacity: 0;
+  }
+  [data-mobile-toggle].open [data-line-3] {
+    transform: rotate(-45deg) translateY(-4px);
+  }
+</style>
+
+<script>
+  const toggle = document.querySelector('[data-mobile-toggle]');
+  const menu = document.querySelector('[data-mobile-menu]') as HTMLElement;
+  const links = document.querySelectorAll('[data-mobile-link]');
+
+  if (toggle && menu) {
+    toggle.addEventListener('click', () => {
+      toggle.classList.toggle('open');
+      if (menu.style.maxHeight && menu.style.maxHeight !== '0px') {
+        menu.style.maxHeight = '0px';
+      } else {
+        menu.style.maxHeight = menu.scrollHeight + 'px';
+      }
+    });
+
+    links.forEach((link) => {
+      link.addEventListener('click', () => {
+        toggle.classList.remove('open');
+        menu.style.maxHeight = '0px';
+      });
+    });
+  }
+</script>

@@ -1,0 +1,56 @@
+---
+const steps = [
+  {
+    number: '01',
+    title: 'Discovery',
+    description: 'We listen first. Deep-dive into your business goals, technical landscape, and constraints to define a clear scope and roadmap.',
+  },
+  {
+    number: '02',
+    title: 'Development',
+    description: 'Iterative development with regular check-ins. Clean code, thorough testing, and transparent progress at every milestone.',
+  },
+  {
+    number: '03',
+    title: 'Delivery',
+    description: 'Production-ready deployment with documentation, monitoring, and handoff. We ensure you\'re set up for long-term success.',
+  },
+];
+---
+
+<section class="relative py-32 md:py-40">
+  <div class="mx-auto max-w-[1200px] px-6">
+    <!-- Section header -->
+    <div class="mb-16 md:mb-20" data-animate>
+      <span class="text-xs font-mono text-text-muted tracking-widest uppercase block mb-4">
+        03 — Process
+      </span>
+      <h2 class="font-[family-name:var(--font-display)] text-4xl md:text-5xl leading-tight max-w-lg">
+        How we <span class="gradient-text">work</span>
+      </h2>
+    </div>
+
+    <!-- Steps -->
+    <div class="relative grid md:grid-cols-3 gap-8 md:gap-12">
+      <!-- Connecting line (desktop) -->
+      <div class="hidden md:block absolute top-[60px] left-[16.66%] right-[16.66%] h-px bg-gradient-to-r from-accent-cyan via-accent-violet to-accent-blue opacity-30" aria-hidden="true"></div>
+
+      {steps.map((step, i) => (
+        <div data-animate data-animate-delay={String(i + 1)} class="relative">
+          <!-- Step number circle -->
+          <div class="relative z-10 w-[120px] h-[120px] rounded-full border border-border-subtle bg-surface mx-auto md:mx-0 mb-8 flex items-center justify-center group">
+            <div class="absolute inset-0 rounded-full bg-gradient-to-br from-accent-cyan/5 to-accent-violet/5 group-hover:from-accent-cyan/10 group-hover:to-accent-violet/10 transition-all duration-500"></div>
+            <span class="font-mono text-3xl gradient-text font-medium">{step.number}</span>
+          </div>
+
+          <h3 class="text-2xl font-semibold text-text-primary mb-3 text-center md:text-left">
+            {step.title}
+          </h3>
+          <p class="text-text-secondary leading-relaxed text-center md:text-left">
+            {step.description}
+          </p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
