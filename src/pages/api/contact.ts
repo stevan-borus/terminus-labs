@@ -38,7 +38,7 @@ export const POST: APIRoute = async ({ request }) => {
 
     const { data, error: sendError } = await resend.emails.send({
       from: 'Terminus Labs <onboarding@resend.dev>',
-      to: 'contact@terminuslabs.cc',
+      to: 'steva.borus@gmail.com',
       replyTo: email,
       subject: `New inquiry from ${name}`,
       react: createElement(ContactEmail, { name, email, message }),
