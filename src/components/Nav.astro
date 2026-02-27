@@ -36,11 +36,15 @@ const isHome = currentPath === '/';
       class="md:hidden flex items-center justify-center w-10 h-10"
       aria-label="Toggle menu"
     >
-      <div class="flex flex-col gap-1">
-        <span class="w-4 h-px bg-text-secondary transition-all duration-300 origin-center" data-line-1></span>
-        <span class="w-4 h-px bg-text-secondary transition-all duration-300" data-line-2></span>
-        <span class="w-4 h-px bg-text-secondary transition-all duration-300 origin-center" data-line-3></span>
-      </div>
+      <svg data-icon-menu class="w-6 h-6 text-text-secondary transition-opacity duration-300" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <line x1="4" x2="20" y1="12" y2="12"></line>
+        <line x1="4" x2="20" y1="6" y2="6"></line>
+        <line x1="4" x2="20" y1="18" y2="18"></line>
+      </svg>
+      <svg data-icon-close class="w-6 h-6 text-text-secondary transition-opacity duration-300 absolute opacity-0" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M18 6 6 18"></path>
+        <path d="m6 6 12 12"></path>
+      </svg>
     </button>
   </div>
 
@@ -77,15 +81,12 @@ const isHome = currentPath === '/';
     border-bottom: 1px solid color-mix(in srgb, var(--color-border-subtle) 50%, transparent);
   }
 
-  /* Mobile menu open state handled via JS */
-  [data-mobile-toggle].open [data-line-1] {
-    transform: rotate(45deg) translateY(2.5px);
-  }
-  [data-mobile-toggle].open [data-line-2] {
+  /* Mobile menu icon toggle */
+  [data-mobile-toggle].open [data-icon-menu] {
     opacity: 0;
   }
-  [data-mobile-toggle].open [data-line-3] {
-    transform: rotate(-45deg) translateY(-2.5px);
+  [data-mobile-toggle].open [data-icon-close] {
+    opacity: 1;
   }
 </style>
 
